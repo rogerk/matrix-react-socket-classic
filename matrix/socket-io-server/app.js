@@ -51,12 +51,12 @@ const getMatrix = async socket => {
 
 const updatePixel = async (socket, event) => {
     console.log("UPDATEPIXEL CALLED");
-    event.color = "red";
     try {
         const res = await axios.put(
             `http://localhost:3000/matrix/${event.id}`,
             event
         );
+        socket.emit("PixelUpdate", res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
     }
