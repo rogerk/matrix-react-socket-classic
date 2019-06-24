@@ -14,6 +14,7 @@ class MatrixContainer extends Component {
         this.socket.on("AllMatrix", data => {
             store.dispatch(Actions.allMatrix(data));
         });
+        // Backend (DB) has been updated.  Now update the client (UI).
         this.socket.on("PixelUpdate", data => {
             store.dispatch(Actions.pixelColorUpdate(data));
         });
@@ -23,31 +24,35 @@ class MatrixContainer extends Component {
     }
 
     handleClick = event => {
-        //       this.props.dispatch(
-        //           Actions.updatePixelColor({
-        //               socket: this.socket,
-        //               pixel: pixel,
-        //               color: "purple"
-        //           })
-        //       );
-        this.socket.emit("Pixel", { event });
+        store.dispatch(
+            Actions.updatePixelColor({ socket: this.socket, pixel: event })
+        );
     };
 
     componentDidMount = () => {
         store.dispatch(Actions.getMatrix({ socket: this.socket }));
-        store.subscribe(() => this.forceUpdate());
     };
 
     render = () => {
-        const state = store.getState();
-        return <Matrix pixels={state.pixels} handleClick={this.handleClick} />;
+        return (
+            <Matrix pixels={this.props.pixels} handleClick={this.handleClick} />
+        );
     };
 }
 
 const mapStateToProps = state => {
     return {
-        state
+        pixels: state.pixels
     };
 };
 
-export default connect(mapStateToProps)(MatrixContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        onCLick: event => dispatch(handleClick(event))
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MatrixContainer);
