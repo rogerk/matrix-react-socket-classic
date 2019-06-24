@@ -46,13 +46,4 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onCLick: event => dispatch(handleClick(event))
-    };
-};
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(MatrixContainer);
+export default connect(mapStateToProps)(MatrixContainer);
