@@ -26,7 +26,7 @@ export const getMatrix = options => async dispatch => {
     try {
         socket.emit("InitialMatrix", options);
     } catch (err) {
-        dispatch(getMatrixFailure(err));
+        dispatch(allMatrixFailure(err));
     }
 };
 
@@ -42,9 +42,7 @@ export const setColor = color => ({
 });
 
 export const updatePixelColor = options => async dispatch => {
-    const socket = options.socket;
-    const pixel = options.pixel;
-    const color = "purple";
-    pixel.color = color;
-    socket.emit("Pixel", { pixel });
+    const { socket } = options;
+    const { pixel } = options;
+    socket.emit("Pixel", pixel);
 };
