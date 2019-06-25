@@ -24,8 +24,14 @@ class MatrixContainer extends Component {
     }
 
     handleClick = event => {
+        const state = store.getState();
+        const color = state.color;
         store.dispatch(
-            Actions.updatePixelColor({ socket: this.socket, pixel: event })
+            Actions.updatePixelColor({
+                socket: this.socket,
+                pixel: event,
+                color: color
+            })
         );
     };
 
