@@ -1,10 +1,15 @@
-import { ALL_MATRIX, PIXEL_COLOR_UPDATE } from "../constants/action-types";
+import {
+    ALL_MATRIX,
+    PIXEL_COLOR_UPDATE,
+    SET_COLOR
+} from "../constants/action-types";
 import { ALL_MATRIX_FAILURE } from "../constants/action-types";
 import { INITIAL_MATRIX } from "../constants/action-types";
 import store from "../store";
 
 const initialState = {
-    pixels: []
+    pixels: [],
+    color: "#FFFFFF"
 };
 
 export default (state = initialState, action) => {
@@ -26,7 +31,6 @@ export default (state = initialState, action) => {
     } else if (action.type == PIXEL_COLOR_UPDATE) {
         console.log("PIXEL COLOR UPDATE");
         const id = action.pixel.id;
-        action.pixel.color = "purple";
         return {
             ...state,
             pixels: state.pixels.map(pixel =>
@@ -34,6 +38,11 @@ export default (state = initialState, action) => {
                     ? { ...pixel, color: action.pixel.color }
                     : pixel
             )
+        };
+    } else if (action.type == SET_COLOR) {
+        return {
+            ...state,
+            color: action.color.color
         };
     } else {
         return state;
