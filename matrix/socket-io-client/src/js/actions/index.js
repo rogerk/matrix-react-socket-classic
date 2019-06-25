@@ -44,5 +44,7 @@ export const setColor = color => ({
 export const updatePixelColor = options => async dispatch => {
     const { socket } = options;
     const { pixel } = options;
+    const { color } = options;
+    pixel.color = color;
     socket.emit("Pixel", pixel);
 };
