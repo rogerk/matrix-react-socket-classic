@@ -1,34 +1,35 @@
+import { connect } from "react-redux";
 import React, { Component } from "react";
-import ColorPicker from "../presentational/ColorPicker";
-import Matrix from "../presentational/Matrix";
+import ColorPicker from "../presentational/ColorPicker.jsx";
+import store from "../../store/index.js";
+import * as Actions from "../../actions";
 
 class ColorPickerContainer extends Component {
     constructor() {
         super();
-        this.state = {
-            selectedColor: ""
-        };
         this.handleColorChange = this.handleColorChange.bind(this);
     }
 
     handleColorChange = event => {
-        this.setState({ selectedColor: event });
+        store.dispatch(Actions.setColor({ color: event.target.value }));
     };
 
-    componentDidMount = () => {
-        if (this.state.selectedColor == "") {
-            this.setState({ selectedColor: "#FFFFFF" });
-        }
-    };
+    componentDidMount = () => {};
 
     render = () => {
         return (
             <ColorPicker
-                color={this.state.selectedColor}
+                color={this.props.color}
                 handleColorChange={this.handleColorChange}
             />
         );
     };
 }
 
-export default ColorPickerContainer;
+const mapStateToProps = state => {
+    return {
+        color: state.color
+    };
+};
+
+export default connect(mapStateToProps)(ColorPickerContainer);
