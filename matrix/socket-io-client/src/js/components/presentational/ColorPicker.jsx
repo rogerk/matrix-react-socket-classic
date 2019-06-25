@@ -1,7 +1,7 @@
 import React from "react";
 
 const ColorPicker = props => {
-    const selectedColor = props.color;
+    const { color } = props;
     const { handleColorChange } = props;
     return (
         <div className="container">
@@ -9,8 +9,8 @@ const ColorPicker = props => {
             <div>
                 <input
                     type="color"
-                    value={selectedColor}
-                    onChange={event => handleColorChange(event.target.value)}
+                    value={color}
+                    onChange={handleColorChange}
                 />
             </div>
         </div>
