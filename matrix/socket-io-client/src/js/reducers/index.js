@@ -1,10 +1,11 @@
 import {
     ALL_MATRIX,
+    ALL_MATRIX_FAILURE,
+    INITIAL_MATRIX,
     PIXEL_COLOR_UPDATE,
     SET_COLOR
 } from "../constants/action-types";
-import { ALL_MATRIX_FAILURE } from "../constants/action-types";
-import { INITIAL_MATRIX } from "../constants/action-types";
+
 import store from "../store";
 
 const initialState = {
