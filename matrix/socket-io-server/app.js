@@ -36,7 +36,9 @@ io.on("connection", socket => {
     });
     //   socket.on("Pixel", event => {
     socket.on("Pixel", data => {
-        updatePixel(socket, data);
+        pixel = data.pixel;
+        pixel.color = data.color;
+        updatePixel(socket, pixel);
     });
 });
 
@@ -56,7 +58,7 @@ const updatePixel = async (socket, event) => {
             `http://localhost:3000/matrix/${event.id}`,
             event
         );
-        socket.emit("PixelUpdate", res.data);
+        io.sockets.emit("Pixel", res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
     }
