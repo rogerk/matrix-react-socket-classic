@@ -30,7 +30,6 @@ export default (state = initialState, action) => {
             error: action.error
         };
     } else if (action.type == PIXEL_COLOR_UPDATE) {
-        console.log("PIXEL COLOR UPDATE");
         const id = action.pixel.id;
         return {
             ...state,

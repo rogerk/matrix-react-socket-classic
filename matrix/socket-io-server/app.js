@@ -52,7 +52,6 @@ const getMatrix = async socket => {
 };
 
 const updatePixel = async (socket, event) => {
-    console.log("UPDATEPIXEL CALLED");
     try {
         const res = await axios.put(
             `http://localhost:3000/matrix/${event.id}`,
