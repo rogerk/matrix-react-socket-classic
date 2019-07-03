@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
-import socketIOClient from "socket.io-client";
+import io from "socket.io-client";
 import Matrix from "../presentational/Matrix.jsx";
 import store from "../../store/index.js";
 import * as Actions from "../../actions";
@@ -9,13 +9,13 @@ class MatrixContainer extends Component {
     constructor(props) {
         super();
         this.handleClick = this.handleClick.bind(this);
-        this.socket = socketIOClient("http://127.0.0.1:4001");
+        this.socket = io("http://127.0.0.1:4001");
         // Listen for our events
         this.socket.on("AllMatrix", data => {
             store.dispatch(Actions.allMatrix(data));
         });
         // Backend (DB) has been updated.  Now update the client (UI).
-        this.socket.on("PixelUpdate", data => {
+        this.socket.on("Pixel", data => {
             store.dispatch(Actions.pixelColorUpdate(data));
         });
         this.socket.on("AllMatrixFailure", err => {
