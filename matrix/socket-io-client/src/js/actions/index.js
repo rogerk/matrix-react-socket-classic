@@ -1,5 +1,6 @@
 import { ALL_MATRIX } from "../constants/action-types";
 import { ALL_MATRIX_FAILURE } from "../constants/action-types";
+import { RESET } from "../constants/action-types";
 import { SET_COLOR } from "../constants/action-types";
 import { INITIAL_MATRIX } from "../constants/action-types";
 import { PIXEL_COLOR_UPDATE } from "../constants/action-types";
@@ -33,6 +34,10 @@ export const getMatrix = options => async dispatch => {
 // Action when pixel is selected
 export const pixelColorUpdate = pixel => {
     return { type: PIXEL_COLOR_UPDATE, pixel };
+};
+
+export const resetAll = reset => {
+    return { type: RESET, reset };
 };
 
 // Color Picker Action
