@@ -1,6 +1,6 @@
 import React from "react";
 import MatrixContainer from "./container/MatrixContainer.jsx";
-import ColorPickerContainer from "./container/ColorPickerContainer.jsx";
+import ControlsContainer from "./container/ControlsContainer.jsx";
 
 const App = () => {
     return (
@@ -10,7 +10,7 @@ const App = () => {
                     <MatrixContainer />
                 </div>
                 <div className="col-sm">
-                    <ColorPickerContainer />
+                    <ControlsContainer />
                 </div>
             </div>
         </div>
