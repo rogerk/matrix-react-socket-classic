@@ -1,19 +1,14 @@
 import React from "react";
+import "./controls-styles.scss";
 
 const Reset = props => {
     const { reset } = props;
     const { handleReset } = props;
 
     return (
-        <div>
-            <button
-                type="button"
-                className="btn btn-outline-dark"
-                onClick={handleReset}
-            >
-                Reset
-            </button>
-        </div>
+        <button type="button" className="reset" onClick={handleReset}>
+            Reset
+        </button>
     );
 };
 

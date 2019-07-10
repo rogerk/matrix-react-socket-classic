@@ -29,7 +29,13 @@ const Matrix = props => {
         index++;
     });
 
-    return <div className="container-fluid">{rows}</div>;
+    return (
+        <div className="card border-dark">
+            <div className="cardBody">
+                <div className="container-fluid">{rows}</div>
+            </div>
+        </div>
+    );
 };
 
 Matrix.propTypes = {
