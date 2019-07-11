@@ -34,7 +34,7 @@ io.on("connection", socket => {
     socket.on("disconnect", () => {
         console.log("Client Disconnected");
     });
-    //   socket.on("Pixel", event => {
+
     socket.on("Pixel", data => {
         pixel = data.pixel;
         pixel.color = data.color;
