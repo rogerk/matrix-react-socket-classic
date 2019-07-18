@@ -1,7 +1,7 @@
+import socketSendReceive from "../middleware/socketSendReceive";
 import { createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import Reducers from "../reducers";
 
-const store = createStore(Reducers, applyMiddleware(thunk));
+const store = createStore(Reducers, applyMiddleware(socketSendReceive));
 
 export default store;
