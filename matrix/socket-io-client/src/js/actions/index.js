@@ -52,3 +52,9 @@ export const updatePixelColor = options => async dispatch => {
     const { color } = options;
     socket.emit("Pixel", { pixel: pixel, color: color });
 };
+
+export const resetMatrix = options => async dispatch => {
+    const { socket } = options;
+    const { color } = options;
+    socket.emit("Reset", { color: color });
+};
