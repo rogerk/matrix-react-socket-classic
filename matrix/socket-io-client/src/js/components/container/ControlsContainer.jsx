@@ -5,7 +5,7 @@ import store from "../../store/index.js";
 import * as Actions from "../../actions";
 
 class ControlsContainer extends Component {
-    constructor() {
+    constructor(props) {
         super();
         this.handleColorChange = this.handleColorChange.bind(this);
         this.handleReset = this.handleReset.bind(this);
@@ -16,7 +16,7 @@ class ControlsContainer extends Component {
     };
 
     handleReset = event => {
-        store.dispatch(Actions.resetAll({ reset: true }));
+        store.dispatch(Actions.resetMatrix({ color: this.props.defaultColor }));
     };
 
     componentDidMount = () => {};
@@ -37,7 +37,8 @@ class ControlsContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        color: state.color
+        color: state.color,
+        defaultColor: state.defaultColor
     };
 };
 
