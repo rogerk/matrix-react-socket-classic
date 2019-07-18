@@ -40,6 +40,11 @@ io.on("connection", socket => {
         pixel.color = data.color;
         updatePixel(socket, pixel);
     });
+
+    socket.on("Reset", data => {
+        color = data.color;
+        resetMatrix(socket, color);
+    });
 });
 
 const getMatrix = async socket => {
@@ -58,6 +63,21 @@ const updatePixel = async (socket, event) => {
             event
         );
         io.sockets.emit("Pixel", res.data);
+    } catch (error) {
+        console.error(`Error: ${error}`);
+    }
+};
+
+const resetMatrix = async (socket, event) => {
+    try {
+        const res = await axios
+            .get("http://localhost:3000/matrix")
+            .then(res => {
+                data = res.data;
+                data.array.forEach(element => {
+                    console.log(`${element.id}`);
+                });
+            });
     } catch (error) {
         console.error(`Error: ${error}`);
     }
