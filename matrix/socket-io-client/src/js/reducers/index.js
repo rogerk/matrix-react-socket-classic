@@ -10,7 +10,8 @@ import store from "../store";
 
 const initialState = {
     pixels: [],
-    color: "#FFFFFF"
+    color: "#FFFFFF",
+    defaultColor: "#FFFFFF"
 };
 
 export default (state = initialState, action) => {
