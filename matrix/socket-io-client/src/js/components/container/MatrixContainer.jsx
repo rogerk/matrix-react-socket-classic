@@ -9,18 +9,6 @@ class MatrixContainer extends Component {
     constructor(props) {
         super();
         this.handleClick = this.handleClick.bind(this);
-        this.socket = io("http://127.0.0.1:4001");
-        // Listen for our events
-        this.socket.on("AllMatrix", data => {
-            store.dispatch(Actions.allMatrix(data));
-        });
-        // Backend (DB) has been updated.  Now update the client (UI).
-        this.socket.on("Pixel", data => {
-            store.dispatch(Actions.pixelColorUpdate(data));
-        });
-        this.socket.on("AllMatrixFailure", err => {
-            store.dispatch(Actions.allMatrixFailure(err));
-        });
     }
 
     handleClick = event => {
@@ -28,7 +16,6 @@ class MatrixContainer extends Component {
         const color = state.color;
         store.dispatch(
             Actions.updatePixelColor({
-                socket: this.socket,
                 pixel: event,
                 color: color
             })
@@ -36,7 +23,7 @@ class MatrixContainer extends Component {
     };
 
     componentDidMount = () => {
-        store.dispatch(Actions.getMatrix({ socket: this.socket }));
+        store.dispatch(Actions.initialMatrix());
     };
 
     render = () => {
