@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
     } else if (action.type == ALL_MATRIX) {
         return {
             ...state,
-            pixels: action.data
+            pixels: action.result
         };
     } else if (action.type == ALL_MATRIX_FAILURE) {
         console.log("Error: ", action.error);
@@ -31,12 +31,12 @@ export default (state = initialState, action) => {
             error: action.error
         };
     } else if (action.type == PIXEL_COLOR_UPDATE) {
-        const id = action.pixel.id;
+        const id = action.result.id;
         return {
             ...state,
             pixels: state.pixels.map(pixel =>
-                pixel.id === action.pixel.id
-                    ? { ...pixel, color: action.pixel.color }
+                pixel.id === id
+                    ? { ...pixel, color: action.result.color }
                     : pixel
             )
         };
