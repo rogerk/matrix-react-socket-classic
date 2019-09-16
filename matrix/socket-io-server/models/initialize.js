@@ -45,13 +45,7 @@ try {
     matrix.save().then(async () => {
         console.log("matrix initialized!");
         const matrixArray = await MatrixModel.find({}).exec();
-        console.log(matrixArray);
-        //        const query = MatrixModel.find({});
-        //        query.select("matrix");
-        //        query.exec(function(error, arr) {
-        //            if (error) console.log("ERROR" + error);
-        //            console.log(JSON.stringify(arr));
-        //        });
+        console.log(JSON.stringify(matrixArray));
     });
 } catch (error) {
     console.error(`matrix initiaization error: ${error}`);
