@@ -4,9 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "build": "webpack --mode production",
-        "dev": "webpack --mode development",
-        "start": "webpack-dev-server --config ./webpack.config.js --mode development",
+        "start": "webpack-dev-server --config build-utils/webpack.config.js --env.env=dev",
+        "build": "webpack --config build-utils/webpack.config.js --env.env=prod",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [],
@@ -20,18 +19,21 @@
         "@babel/preset-react": "^7.0.0",
         "babel-loader": "^8.0.6",
         "babel-polyfill": "^6.26.0",
+        "clean-webpack-plugin": "^3.0.0",
         "css-loader": "^2.1.1",
+        "dotenv-webpack": "^1.7.0",
         "html-loader": "^0.5.5",
         "html-webpack-plugin": "^3.2.0",
         "node-sass": "^4.12.0",
+        "react-hot-loader": "^4.12.15",
         "sass-loader": "^7.1.0",
         "style-loader": "^0.23.1",
-        "webpack": "^4.32.2",
-        "webpack-cli": "^3.3.2",
-        "webpack-dev-server": "^3.4.1"
+        "webpack": "^4.41.1",
+        "webpack-cli": "^3.3.9",
+        "webpack-dev-server": "^3.8.2",
+        "webpack-merge": "^4.2.2"
     },
     "dependencies": {
-        "@babel/runtime": "^7.4.5",
         "react": "^16.8.6",
         "react-dom": "^16.8.6",
         "react-redux": "^7.0.3",
