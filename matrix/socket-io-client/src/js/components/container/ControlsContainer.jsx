@@ -16,7 +16,7 @@ class ControlsContainer extends Component {
     };
 
     handleReset = event => {
-        store.dispatch(Actions.resetMatrix({ color: this.props.defaultColor }));
+        store.dispatch(Actions.resetMatrixColor({ color: this.props.color }));
     };
 
     componentDidMount = () => {};
