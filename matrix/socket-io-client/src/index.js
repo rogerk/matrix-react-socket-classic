@@ -10,3 +10,7 @@ render(
     </Provider>,
     document.getElementById("matrix")
 );
+
+if (module.hot) {
+    module.hot.accept();
+}
