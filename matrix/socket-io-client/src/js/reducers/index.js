@@ -3,10 +3,9 @@ import {
     ALL_MATRIX_FAILURE,
     INITIAL_MATRIX,
     PIXEL_COLOR_UPDATE,
-    SET_COLOR
+    SET_COLOR,
+    MATRIX_COLOR_RESET
 } from "../constants/action-types";
-
-import store from "../store";
 
 const initialState = {
     pixels: [],
@@ -15,11 +14,7 @@ const initialState = {
 };
 
 export default (state = initialState, action) => {
-    if (action.type === INITIAL_MATRIX) {
-        return {
-            ...state
-        };
-    } else if (action.type == ALL_MATRIX) {
+    if (action.type == ALL_MATRIX) {
         return {
             ...state,
             pixels: action.result
@@ -40,6 +35,7 @@ export default (state = initialState, action) => {
                     : pixel
             )
         };
+    } else if (action.type == MATRIX_COLOR_RESET) {
     } else if (action.type == SET_COLOR) {
         return {
             ...state,
