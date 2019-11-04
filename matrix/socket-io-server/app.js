@@ -28,21 +28,23 @@ const io = socketIo.listen(server);
 
 io.on("connection", socket => {
     console.log("Client Connected");
+
     socket.on("INITIAL_MATRIX", () => {
         getMatrix(socket);
     });
+
     socket.on("disconnect", () => {
         console.log("Client Disconnected");
     });
 
     socket.on("UPDATE_PIXEL_COLOR", data => {
-        pixel = data.pixel;
+        const pixel = data.pixel;
         pixel.color = data.color;
         updatePixel(socket, pixel);
     });
 
-    socket.on("Reset", data => {
-        color = data.color;
+    socket.on("RESET_MATRIX_COLOR", data => {
+        const color = data.color;
         resetMatrix(socket, color);
     });
 });
@@ -70,14 +72,16 @@ const updatePixel = async (socket, event) => {
 
 const resetMatrix = async (socket, event) => {
     try {
-        const res = await axios
-            .get("http://localhost:3000/matrix")
-            .then(res => {
-                data = res.data;
-                data.array.forEach(element => {
-                    console.log(`${element.id}`);
-                });
-            });
+        const res = await axios.get("http://localhost:3000/matrix");
+        const data = res.data;
+        data.map(async element => {
+            element.color = event;
+            const res = await axios.put(
+                `http://localhost:3000/matrix/${element.id}`,
+                element
+            );
+        });
+        getMatrix(socket);
     } catch (error) {
         console.error(`Error: ${error}`);
     }
