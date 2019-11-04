@@ -2,8 +2,9 @@ import {
     ALL_MATRIX,
     ALL_MATRIX_FAILURE,
     INITIAL_MATRIX,
+    MATRIX_COLOR_RESET,
     PIXEL_COLOR_UPDATE,
-    RESET,
+    RESET_MATRIX_COLOR,
     SET_COLOR,
     UPDATE_PIXEL_COLOR
 } from "../constants/action-types";
@@ -16,32 +17,10 @@ export const initialMatrix = () => {
     };
 };
 
-export const allMatrix = data => {
-    return { type: ALL_MATRIX, data };
-};
-
 export const allMatrixFailure = err => ({
     type: ALL_MATRIX_FAILURE,
     err
 });
-
-export const getMatrix = options => async dispatch => {
-    dispatch(initialMatrix());
-
-    const { socket } = options;
-    delete options.socket;
-
-    try {
-        socket.emit("InitialMatrix", options);
-    } catch (err) {
-        dispatch(allMatrixFailure(err));
-    }
-};
-
-// Action when pixel is selected
-export const pixelColorUpdate = pixel => {
-    return { type: PIXEL_COLOR_UPDATE, pixel };
-};
 
 export const resetAll = reset => {
     return { type: RESET, reset };
@@ -62,8 +41,11 @@ export const updatePixelColor = payload => {
     };
 };
 
-export const resetMatrix = options => async dispatch => {
-    const { socket } = options;
-    const { color } = options;
-    socket.emit("Reset", { color: color });
+export const resetMatrixColor = payload => {
+    return {
+        event: RESET_MATRIX_COLOR,
+        emit: true,
+        handle: MATRIX_COLOR_RESET,
+        payload: payload
+    };
 };
