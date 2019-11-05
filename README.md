@@ -1,5 +1,5 @@
-# projects
+# matrix-react-socket-classic 
 
-This area is a collection of projects illustrating the use of various technologies.
+This repository contains code that demonstrates the manipulation of matrix pixel colors. 
 
 - [matrix](matrix/README.md)
