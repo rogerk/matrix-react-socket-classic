@@ -33,6 +33,10 @@ export default (state = initialState, action) => {
       )
     };
   } else if (action.type == MATRIX_COLOR_RESET) {
+    return {
+      ...state,
+      pixels: action.result
+    };
   } else if (action.type == SET_COLOR) {
     return {
       ...state,
