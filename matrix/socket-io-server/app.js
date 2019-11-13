@@ -16,11 +16,9 @@ const socketIo = require("socket.io");
 const axios = require("axios");
 
 const port = process.env.PORT || 4001;
-const index = require("./routes/index");
 
 const app = express();
 
-app.use(index);
 app.use(express.json);
 
 const server = http.createServer(app);
