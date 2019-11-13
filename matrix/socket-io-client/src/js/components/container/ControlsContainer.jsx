@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import Controls from "../presentational/Controls.jsx";
-import store from "../../store/index.js";
-import * as Actions from "../../actions";
+import { setColor } from "../../actions/index.js";
+import { resetMatrixColor } from "../../actions/index.js";
 
 class ControlsContainer extends Component {
     constructor(props) {
@@ -12,11 +12,11 @@ class ControlsContainer extends Component {
     }
 
     handleColorChange = event => {
-        store.dispatch(Actions.setColor({ color: event.target.value }));
+        this.props.setColor({ color: event.target.value });
     };
 
     handleReset = event => {
-        store.dispatch(Actions.resetMatrixColor({ color: this.props.color }));
+        this.props.resetMatrixColor({ color: this.props.color });
     };
 
     componentDidMount = () => {};
@@ -42,4 +42,18 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps)(ControlsContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        setColor: payload => {
+            dispatch(setColor(payload));
+        },
+        resetMatrixColor: payload => {
+            dispatch(resetMatrixColor(payload));
+        }
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ControlsContainer);
