@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import Matrix from "../presentational/Matrix.jsx";
-import store from "../../store/index.js";
-import * as Actions from "../../actions";
+import { initialMatrix } from "../../actions/index.js";
+import { updatePixelColor } from "../../actions/index.js";
 
 class MatrixContainer extends Component {
     constructor(props) {
@@ -11,18 +11,12 @@ class MatrixContainer extends Component {
     }
 
     handleClick = event => {
-        const state = store.getState();
-        const color = state.color;
-        store.dispatch(
-            Actions.updatePixelColor({
-                pixel: event,
-                color: color
-            })
-        );
+        const color = this.props.color;
+        this.props.updatePixelColor({ pixel: event, color: color });
     };
 
     componentDidMount = () => {
-        store.dispatch(Actions.initialMatrix());
+        this.props.initialMatrix();
     };
 
     render = () => {
@@ -34,8 +28,23 @@ class MatrixContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        pixels: state.pixels
+        pixels: state.pixels,
+        color: state.color
     };
 };
 
-export default connect(mapStateToProps)(MatrixContainer);
+const mapDispatchToProps = dispatch => {
+    return {
+        initialMatrix: () => {
+            dispatch(initialMatrix());
+        },
+        updatePixelColor: payload => {
+            dispatch(updatePixelColor(payload));
+        }
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MatrixContainer);
