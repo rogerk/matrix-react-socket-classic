@@ -6,7 +6,7 @@ The matrix server is a Node.js Express server that utilizes Socket.IO for receiv
 
 -   Node.js (Express)
 -   Socket.io
--   axios
+-   Axios
 -   JSON Server
 -   JSON
 
