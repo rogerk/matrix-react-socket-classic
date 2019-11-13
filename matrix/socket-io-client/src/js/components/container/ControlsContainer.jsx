@@ -37,8 +37,7 @@ class ControlsContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        color: state.color,
-        defaultColor: state.defaultColor
+        color: state.color
     };
 };
 
