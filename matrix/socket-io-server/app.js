@@ -1,7 +1,7 @@
-const express = require("express");
-const http = require("http");
-const socketIo = require("socket.io");
-const axios = require("axios");
+import express from "express";
+import http from "http";
+import socketIo from "socket.io";
+import axios from "axios";
 
 const port = process.env.PORT || 4001;
 
