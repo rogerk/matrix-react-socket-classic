@@ -2,6 +2,7 @@ import express from "express";
 import http from "http";
 import socketIo from "socket.io";
 import axios from "axios";
+import { SSL_OP_NO_TICKET } from "constants";
 
 const port = process.env.PORT || 4001;
 
@@ -50,7 +51,7 @@ const updatePixel = async (socket, event) => {
             `http://localhost:3000/matrix/${event.id}`,
             event
         );
-        io.sockets.emit("UPDATE_PIXEL_COLOR", res.data);
+        socket.emit("UPDATE_PIXEL_COLOR", res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
     }
