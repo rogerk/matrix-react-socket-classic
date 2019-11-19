@@ -2,7 +2,11 @@ import express from "express";
 import http from "http";
 import socketIo from "socket.io";
 import axios from "axios";
-import { SSL_OP_NO_TICKET } from "constants";
+import {
+    INITIAL_MATRIX,
+    UPDATE_PIXEL_COLOR,
+    RESET_MATRIX_COLOR
+} from "./constants/event-types.js";
 
 const port = process.env.PORT || 4001;
 
@@ -16,7 +20,7 @@ const io = socketIo.listen(server);
 io.on("connection", socket => {
     console.log("Client Connected");
 
-    socket.on("INITIAL_MATRIX", () => {
+    socket.on(INITIAL_MATRIX, () => {
         getMatrix(socket);
     });
 
@@ -24,13 +28,13 @@ io.on("connection", socket => {
         console.log("Client Disconnected");
     });
 
-    socket.on("UPDATE_PIXEL_COLOR", data => {
+    socket.on(UPDATE_PIXEL_COLOR, data => {
         const pixel = data.pixel;
         pixel.color = data.color;
         updatePixel(socket, pixel);
     });
 
-    socket.on("RESET_MATRIX_COLOR", data => {
+    socket.on(RESET_MATRIX_COLOR, data => {
         const color = data.color;
         resetMatrix(socket, color);
     });
@@ -39,7 +43,7 @@ io.on("connection", socket => {
 const getMatrix = async socket => {
     try {
         const res = await getMatrixData(socket);
-        socket.emit("INITIAL_MATRIX", res.data);
+        socket.emit(INITIAL_MATRIX, res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
     }
@@ -51,7 +55,7 @@ const updatePixel = async (socket, event) => {
             `http://localhost:3000/matrix/${event.id}`,
             event
         );
-        io.sockets.emit("UPDATE_PIXEL_COLOR", res.data);
+        io.sockets.emit(UPDATE_PIXEL_COLOR, res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
     }
@@ -69,7 +73,7 @@ const resetMatrix = async (socket, event) => {
             );
         });
         res = await getMatrixData(socket);
-        io.sockets.emit("RESET_MATRIX_COLOR", res.data);
+        io.sockets.emit(RESET_MATRIX_COLOR, res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
     }

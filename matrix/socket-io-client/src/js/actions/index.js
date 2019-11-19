@@ -7,7 +7,7 @@ import {
     RESET_MATRIX_COLOR,
     SET_COLOR,
     UPDATE_PIXEL_COLOR
-} from "../constants/action-types";
+} from "../constants/event-types";
 
 export const initialMatrix = () => {
     return {

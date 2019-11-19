@@ -4,7 +4,7 @@ import {
     PIXEL_COLOR_UPDATE,
     SET_COLOR,
     MATRIX_COLOR_RESET
-} from "../constants/action-types";
+} from "../constants/event-types";
 
 const initialState = {
     pixels: [],

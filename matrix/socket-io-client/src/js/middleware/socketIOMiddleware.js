@@ -1,5 +1,3 @@
-import { ALL_MATRIX_FAILURE } from "../constants/action-types";
-
 const socketIOMiddleware = socket => store => next => action => {
     const { event, emit, handle, errorHandle, payload, ...rest } = action;
 
