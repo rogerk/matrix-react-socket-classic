@@ -13,7 +13,8 @@ export const initialMatrix = () => {
     return {
         event: INITIAL_MATRIX,
         emit: true,
-        handle: ALL_MATRIX
+        handle: ALL_MATRIX,
+        errorHandle: ALL_MATRIX_FAILURE
     };
 };
 

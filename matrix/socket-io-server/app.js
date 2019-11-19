@@ -51,7 +51,7 @@ const updatePixel = async (socket, event) => {
             `http://localhost:3000/matrix/${event.id}`,
             event
         );
-        socket.emit("UPDATE_PIXEL_COLOR", res.data);
+        io.sockets.emit("UPDATE_PIXEL_COLOR", res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
     }
@@ -69,7 +69,7 @@ const resetMatrix = async (socket, event) => {
             );
         });
         res = await getMatrixData(socket);
-        socket.emit("RESET_MATRIX_COLOR", res.data);
+        io.sockets.emit("RESET_MATRIX_COLOR", res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
     }

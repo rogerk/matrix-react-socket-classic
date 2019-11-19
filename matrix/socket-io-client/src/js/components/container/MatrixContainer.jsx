@@ -20,16 +20,24 @@ class MatrixContainer extends Component {
     };
 
     render = () => {
-        return (
-            <Matrix pixels={this.props.pixels} handleClick={this.handleClick} />
-        );
+        if (this.props.error) {
+            return <h3>{this.props.error}</h3>;
+        } else {
+            return (
+                <Matrix
+                    pixels={this.props.pixels}
+                    handleClick={this.handleClick}
+                />
+            );
+        }
     };
 }
 
 const mapStateToProps = state => {
     return {
         pixels: state.pixels,
-        color: state.color
+        color: state.color,
+        error: state.error
     };
 };
 
