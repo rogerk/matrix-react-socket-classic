@@ -12,6 +12,13 @@ const socketIOMiddleware = socket => store => next => action => {
         });
     });
 
+    socket.on("server_error", error => {
+        store.dispatch({
+            type: errorHandle,
+            error: error
+        });
+    });
+
     const handleEvent = result =>
         store.dispatch({ type: handle, result, ...rest });
 
