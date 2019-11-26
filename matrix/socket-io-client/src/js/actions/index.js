@@ -1,6 +1,6 @@
 import {
     ALL_MATRIX,
-    ALL_MATRIX_FAILURE,
+    MATRIX_FAILURE,
     INITIAL_MATRIX,
     MATRIX_COLOR_RESET,
     PIXEL_COLOR_UPDATE,
@@ -14,12 +14,12 @@ export const initialMatrix = () => {
         event: INITIAL_MATRIX,
         emit: true,
         handle: ALL_MATRIX,
-        errorHandle: ALL_MATRIX_FAILURE
+        errorHandle: MATRIX_FAILURE
     };
 };
 
 export const allMatrixFailure = err => ({
-    type: ALL_MATRIX_FAILURE,
+    type: MATRIX_FAILURE,
     err
 });
 
