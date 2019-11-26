@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import "./matrix-styles.scss";
+import "../../../styles/matrix-styles.scss";
 
 const Matrix = props => {
     const { handleClick } = props;

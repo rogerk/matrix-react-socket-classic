@@ -20,16 +20,14 @@ class MatrixContainer extends Component {
     };
 
     render = () => {
-        if (this.props.error) {
-            return <h3>{this.props.error}</h3>;
-        } else {
-            return (
+        return (
+            <div>
                 <Matrix
                     pixels={this.props.pixels}
                     handleClick={this.handleClick}
                 />
-            );
-        }
+            </div>
+        );
     };
 }
 

@@ -1,7 +1,7 @@
 import React from "react";
 import ColorPicker from "./ColorPicker.jsx";
 import Reset from "./Reset.jsx";
-import "./controls-styles.scss";
+import "../../../styles/controls-styles.scss";
 
 const Controls = props => {
     const { color } = props;
