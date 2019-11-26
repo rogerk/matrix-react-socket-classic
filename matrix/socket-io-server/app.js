@@ -2,13 +2,19 @@ import express from "express";
 import http from "http";
 import socketIo from "socket.io";
 import axios from "axios";
+import dotenv from "dotenv";
+import fs from "fs";
 import {
     INITIAL_MATRIX,
+    MATRIX_FAILURE,
     UPDATE_PIXEL_COLOR,
     RESET_MATRIX_COLOR
 } from "./constants/event-types.js";
 
+dotenv.config();
 const port = process.env.PORT || 4001;
+const jsonDB = process.env.JSON_DB_FILE;
+console.log(jsonDB);
 
 const app = express();
 
@@ -42,10 +48,11 @@ io.on("connection", socket => {
 
 const getMatrix = async socket => {
     try {
-        const res = await getMatrixData(socket);
+        const res = await getMatrixData();
         socket.emit(INITIAL_MATRIX, res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
+        socket.emit("server_error", "Could not get matrix data", `${error}`);
     }
 };
 
@@ -58,6 +65,7 @@ const updatePixel = async (socket, event) => {
         io.sockets.emit(UPDATE_PIXEL_COLOR, res.data);
     } catch (error) {
         console.error(`Error: ${error}`);
+        socket.emit("server_error", "Could not update matrix pixel color");
     }
 };
 
@@ -65,27 +73,20 @@ const resetMatrix = async (socket, event) => {
     try {
         let res = await getMatrixData(socket);
         const data = res.data;
-        data.map(async element => {
+        data.map(element => {
             element.color = event;
-            await axios.put(
-                `http://localhost:3000/matrix/${element.id}`,
-                element
-            );
         });
-        res = await getMatrixData(socket);
-        io.sockets.emit(RESET_MATRIX_COLOR, res.data);
+        fs.writeFileSync(jsonDB, JSON.stringify({ matrix: data }, null, "\t"));
+        io.sockets.emit(RESET_MATRIX_COLOR, data);
     } catch (error) {
         console.error(`Error: ${error}`);
+        socket.emit(MATRIX_FAILURE, error);
     }
 };
 
-const getMatrixData = socket => {
-    try {
-        let res = axios.get("http://localhost:3000/matrix");
-        return res;
-    } catch (error) {
-        console.error(`Error: ${error}`);
-    }
+const getMatrixData = () => {
+    let res = axios.get("http://localhost:3000/matrix");
+    return res;
 };
 
 server.listen(port, () => {
