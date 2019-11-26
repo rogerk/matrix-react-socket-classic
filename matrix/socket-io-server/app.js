@@ -14,7 +14,6 @@ import {
 dotenv.config();
 const port = process.env.PORT || 4001;
 const jsonDB = process.env.JSON_DB_FILE;
-console.log(jsonDB);
 
 const app = express();
 
