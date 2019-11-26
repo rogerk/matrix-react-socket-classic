@@ -1,6 +1,6 @@
 import {
     ALL_MATRIX,
-    ALL_MATRIX_FAILURE,
+    MATRIX_FAILURE,
     PIXEL_COLOR_UPDATE,
     SET_COLOR,
     MATRIX_COLOR_RESET
@@ -16,9 +16,10 @@ export default (state = initialState, action) => {
     if (action.type == ALL_MATRIX) {
         return {
             ...state,
-            pixels: action.result
+            pixels: action.result,
+            error: undefined
         };
-    } else if (action.type == ALL_MATRIX_FAILURE) {
+    } else if (action.type == MATRIX_FAILURE) {
         console.log("Error: ", action.error);
         return {
             ...state,
@@ -32,7 +33,8 @@ export default (state = initialState, action) => {
                 pixel.id === id
                     ? { ...pixel, color: action.result.color }
                     : pixel
-            )
+            ),
+            error: undefined
         };
     } else if (action.type == MATRIX_COLOR_RESET) {
         return {
