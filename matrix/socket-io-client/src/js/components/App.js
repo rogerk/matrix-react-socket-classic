@@ -6,7 +6,7 @@ import ControlsContainer from "./container/ControlsContainer.jsx";
 const App = ({ errors }) => {
     return (
         <div>
-            {errors}
+            <div class="error-message">{errors}</div>
             <div className="container">
                 <div className="row">
                     <div>
