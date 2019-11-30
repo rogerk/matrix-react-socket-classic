@@ -79,7 +79,10 @@ const resetMatrix = async (socket, event) => {
         io.sockets.emit(RESET_MATRIX_COLOR, data);
     } catch (error) {
         console.error(`Error: ${error}`);
-        socket.emit(MATRIX_FAILURE, error);
+        socket.emit(
+            "server_error",
+            "Could not update all matrix pixel colors to the specified color"
+        );
     }
 };
 
