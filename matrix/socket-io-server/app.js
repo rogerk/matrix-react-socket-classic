@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import fs from "fs";
 import {
     INITIAL_MATRIX,
-    MATRIX_FAILURE,
     UPDATE_PIXEL_COLOR,
     RESET_MATRIX_COLOR
 } from "./constants/event-types.js";
