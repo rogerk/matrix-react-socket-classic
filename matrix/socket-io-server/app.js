@@ -13,6 +13,8 @@ import {
 dotenv.config();
 const port = process.env.PORT || 4001;
 const jsonDB = process.env.JSON_DB_FILE;
+const dbPort = process.env.DB_PORT;
+const dbHost = process.env.DB_HOST;
 
 const app = express();
 
@@ -57,7 +59,7 @@ const getMatrix = async socket => {
 const updatePixel = async (socket, event) => {
     try {
         const res = await axios.put(
-            `http://localhost:3000/matrix/${event.id}`,
+            `http://${dbHost}:${dbPort}/matrix/${event.id}`,
             event
         );
         io.sockets.emit(UPDATE_PIXEL_COLOR, res.data);
@@ -86,7 +88,7 @@ const resetMatrix = async (socket, event) => {
 };
 
 const getMatrixData = () => {
-    let res = axios.get("http://localhost:3000/matrix");
+    let res = axios.get(`http://${dbHost}:${dbPort}/matrix`);
     return res;
 };
 
