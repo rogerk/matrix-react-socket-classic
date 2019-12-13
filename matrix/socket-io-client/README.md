@@ -4,10 +4,10 @@ The matrix client is a React front end that renders a matrix of pixels (represen
 
 ## Technologies
 
-- React/Redux
-- Socket.io
-- Sass (Styling)
+-   React/Redux
+-   Socket.io
+-   Sass (Styling)
 
-| Component Structure | React / Socket.io Interaction |
-| :-----------------: | :---------------------------: |
-|   ![](matrix.png)   |    ![](matrix-socket.png)     |
+| React Component / Socket.io Interaction |
+| :-------------------------------------: |
+|         ![](matrix-socket.png)          |

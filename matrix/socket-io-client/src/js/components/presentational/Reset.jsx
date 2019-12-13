@@ -2,7 +2,6 @@ import React from "react";
 import "../../../styles/controls-styles.scss";
 
 const Reset = props => {
-    const { reset } = props;
     const { handleReset } = props;
 
     return (

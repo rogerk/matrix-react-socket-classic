@@ -27,7 +27,6 @@ class ControlsContainer extends Component {
                 <Controls
                     color={this.props.color}
                     handleColorChange={this.handleColorChange}
-                    reset={this.props.reset}
                     handleReset={this.handleReset}
                 />
             </div>

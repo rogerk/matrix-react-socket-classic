@@ -6,7 +6,6 @@ import "../../../styles/controls-styles.scss";
 const Controls = props => {
     const { color } = props;
     const { handleColorChange } = props;
-    const { reset } = props;
     const { handleReset } = props;
 
     return (
@@ -30,7 +29,7 @@ const Controls = props => {
                     handleColorChange={props.handleColorChange}
                 />
 
-                <Reset reset={props.reset} handleReset={props.handleReset} />
+                <Reset handleReset={props.handleReset} />
             </div>
         </div>
     );
