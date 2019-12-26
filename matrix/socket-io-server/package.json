@@ -1,23 +1,29 @@
 {
-  "name": "socket-io-server",
-  "version": "1.0.0",
-  "description": "Socket IO Ser:qver",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon --inspect --exec babel-node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Roger Kitain",
-  "license": "BSD-3-Clause",
-  "dependencies": {
-    "axios": "^0.19.0",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "socket.io": "^2.3.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.7.2",
-    "@babel/node": "^7.7.0",
-    "@babel/preset-env": "^7.7.1"
-  }
+    "name": "socket-io-server",
+    "version": "1.0.0",
+    "description": "Socket IO Ser:qver",
+    "main": "app.js",
+    "scripts": {
+        "debug": "nodemon --inspect --watch src --exec babel-node src/app.js",
+        "dev": "nodemon --watch src --exec babel-node src/app.js",
+        "build": "babel src --out-dir dist",
+        "start": "node dist/app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Roger Kitain",
+    "license": "BSD-3-Clause",
+    "dependencies": {
+        "axios": "^0.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "socket.io": "^2.3.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.7.7",
+        "@babel/core": "^7.7.2",
+        "@babel/node": "^7.7.0",
+        "@babel/plugin-transform-runtime": "^7.7.6",
+        "@babel/preset-env": "^7.7.7",
+        "@babel/runtime": "^7.7.7"
+    }
 }
