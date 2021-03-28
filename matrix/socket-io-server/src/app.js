@@ -1,5 +1,4 @@
 import express from "express";
-import http from "http";
 import socketIo from "socket.io";
 import axios from "axios";
 import dotenv from "dotenv";
@@ -17,11 +16,12 @@ const dbPort = process.env.DB_PORT;
 const dbHost = process.env.DB_HOST;
 
 const app = express();
+const http = require("http").Server(app);
 
 app.use(express.json);
 
-const server = http.createServer(app);
-const io = socketIo.listen(server);
+const io = socketIo(http, 
+    { cors: { origin: "http://localhost:8080",  credentials: true}});
 
 io.on("connection", socket => {
     console.log("Client Connected");
@@ -48,6 +48,7 @@ io.on("connection", socket => {
 
 const getMatrix = async socket => {
     try {
+        console.log("GET MATRIX DATA");
         const res = await getMatrixData();
         socket.emit(INITIAL_MATRIX, res.data);
     } catch (error) {
@@ -92,6 +93,6 @@ const getMatrixData = () => {
     return res;
 };
 
-server.listen(port, () => {
+http.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
