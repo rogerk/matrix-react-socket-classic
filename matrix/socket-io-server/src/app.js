@@ -48,7 +48,6 @@ io.on("connection", socket => {
 
 const getMatrix = async socket => {
     try {
-        console.log("GET MATRIX DATA");
         const res = await getMatrixData();
         socket.emit(INITIAL_MATRIX, res.data);
     } catch (error) {
