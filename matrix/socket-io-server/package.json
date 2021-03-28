@@ -1,7 +1,7 @@
 {
     "name": "socket-io-server",
     "version": "1.0.0",
-    "description": "Socket IO Ser:qver",
+    "description": "Socket IO Server",
     "main": "app.js",
     "scripts": {
         "debug": "nodemon --inspect --watch src --exec babel-node src/app.js",
